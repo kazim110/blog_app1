@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { User.new(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Tom', posts_counter: 5)}
+  subject { User.new(name: 'Tom', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Tom', posts_counter: 5) }
 
   before { subject.save }
 
@@ -33,5 +35,4 @@ RSpec.describe User, type: :model do
     subject.posts_counter = 'abc'
     expect(subject).not_to be_valid
   end
-
 end
