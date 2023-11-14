@@ -4,7 +4,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -42,12 +41,6 @@ The Blog App project in Ruby on Rails empowers educational institutions to effic
 1 Use OOP<br>
 2 Use Postgresql<br>
 3 Use Migrations<br>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## 🚀 Live Demo <a name="live-demo"> here is Love Demo</a>
-
-- There is no live demo yet
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
