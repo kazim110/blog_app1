@@ -1,8 +1,9 @@
 <div class='card m-2'>
 <div class="card-body">
-<h5 class="card-title"><%= @post.title -%></h5>
-<p class='card-text'><%= @post.comments.count %></p>
-<p class='card-text'><%= @post.likes.count %></p>
+<div class='d-flex flex-row justify-content-between'>
+  <h5 class="card-title">Post#<%= @post.id -%> by <%= @post.author.name%></h5>
+  <p class="card-text d-flex justify-content-end"><small class="text-body-secondary">Comments: <%= @post.comments.count -%></small>, <small class="text-body-secondary">Likes: <%= @post.likes.count -%></small></p>
+</div>
 <p class="card-text"><%= @post.text -%></p>
 </div>
 <div class='card-footer'>
