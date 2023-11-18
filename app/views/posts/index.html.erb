@@ -23,9 +23,11 @@
     <% post.recent_comments.each do |comment| %>
         <p><strong><%= comment.user.name %>:</strong>
         <%= comment.text %></p>
-        <p class="card-text d-flex justify-content-end"><small class="text-body-secondary">Comments: <%= post.comments.count -%></small>, <small class="text-body-secondary">Likes: <%= post.likes.count -%></small></p>
     <% end %>
-    
+    <p class="card-text d-flex justify-content-end"><small class="text-body-secondary">Comments: <%= post.comments.count -%></small>, <small class="text-body-secondary">Likes: <%= post.likes.count -%></small></p>
+    <div class="new_like">
+      <%= button_to "Like", user_post_likes_path(@user, post), method: :post, remote: true %>
+    </div>
     </div>
   </div>
   <%-end-%>
