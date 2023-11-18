@@ -1,3 +1,4 @@
+
 <div class='card m-2'>
 <div class="card-body">
 <div class='d-flex flex-row justify-content-between'>
@@ -11,5 +12,8 @@
   <p><strong><%= comment.user.name %>:</strong>
   <%= comment.text %></p>
 <% end%>
+<div class="new_comment btn btn-primary text-white">
+    <%= link_to 'New Comment', new_user_post_comment_path(@user, @post) %>
+  </div>
 </div>
 </div>
