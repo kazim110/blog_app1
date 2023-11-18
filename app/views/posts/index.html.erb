@@ -1,3 +1,31 @@
-<h2>
-Here is a list for a given posts
-</h>
+<div class='main d-flex flex-column'>
+  <div class="card m-3">
+    <div class="row g-0 p-1">
+      <div class="col-md-4">
+        <img src=<%= @user.photo -%> class="img-fluid w-50" style='height:200px;' alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.name -%></h5>
+          <p class="card-text"><small class="text-body-secondary">Number of Posts: <%= @user.posts.count -%></small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- @user.posts.each do |post| -%>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= post.title -%></h5>
+      <p class="card-text"><%= post.text -%></p>
+    </div>
+    <div class='card-footer'>
+    <% post.recent_comments.each do |comment| %>
+        <p><strong><%= comment.user.name %>:</strong>
+        <%= comment.text %></p>
+    <% end %>
+    
+    </div>
+  </div>
+  <%-end-%>
+</div>
