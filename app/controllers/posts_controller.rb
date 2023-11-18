@@ -25,9 +25,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html {
-          redirect_to user_posts_path(@user), notice: 'Post was successfully created.'
-        }
+        format.html {redirect_to user_posts_path(@user), notice: 'Post was successfully created.'}
       else
         flash.now[:error] = 'Failed to create the post.'
         Rails.logger.debug @post.errors.inspect
