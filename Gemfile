@@ -2,10 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rubocop', '>= 1.0', '< 2.0'
 
-gem "bootstrap", "~> 5.0"
-
-gem "bootstrap_form", "~> 5.4"
-
 ruby '3.2.2'
 
 gem 'rails-controller-testing'
