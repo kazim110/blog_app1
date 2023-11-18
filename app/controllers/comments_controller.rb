@@ -14,14 +14,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html {
-          redirect_to user_post_path(@user, @post), notice: 'Comment created'
-        }
+        format.html { redirect_to user_post_path(@user, @post), notice: 'Comment created' }
       else
-        format.html {
-          render :new
-
-        }
+        format.html { render :new }
       end
     end
   end
