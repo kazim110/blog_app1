@@ -1,3 +1,15 @@
-<h2>
-Here is details for a given post
-</h>
+<div class='card m-2'>
+<div class="card-body">
+<div class='d-flex flex-row justify-content-between'>
+  <h5 class="card-title">Post#<%= @post.id -%> by <%= @post.author.name%></h5>
+  <p class="card-text d-flex justify-content-end"><small class="text-body-secondary">Comments: <%= @post.comments.count -%></small>, <small class="text-body-secondary">Likes: <%= @post.likes.count -%></small></p>
+</div>
+<p class="card-text"><%= @post.text -%></p>
+</div>
+<div class='card-footer'>
+<% @post.comments.each do |comment| %>
+  <p><strong><%= comment.user.name %>:</strong>
+  <%= comment.text %></p>
+<% end%>
+</div>
+</div>
