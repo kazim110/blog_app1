@@ -14,7 +14,7 @@ RSpec.feature 'Post details display', type: :feature do
   scenario 'Display post details and comments' do
     visit user_post_path(user_id: @user.id, id: @post.id)
     # Check if post details are displayed
-    expect(page).to have_content("Post\##{@post.id}")
+    expect(page).to have_content("Post##{@post.id}")
     expect(page).to have_content(@user.name)
     expect(page).to have_content('Comments: 2') # Assuming 2 comments were created in the before block
     expect(page).to have_content('This is the content of the post')
