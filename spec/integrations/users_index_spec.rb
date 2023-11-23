@@ -17,8 +17,7 @@ RSpec.feature 'User Index Page', type: :feature do
 
     # Check for the presence of an image in user entries
     within '.main' do
-        expect(page).to have_css('.row img', count: 2)
-      end
+      expect(page).to have_css('.row img', count: 2)
 
     # Check for the current number of posts as reflected in the view
     expect(page).to have_content('Number of Posts: 0', count: 2)

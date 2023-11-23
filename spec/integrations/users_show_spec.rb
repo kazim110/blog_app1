@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.feature 'User Show Page', type: :feature do
   before(:each) do
-    # Create a user for testing
     @user = User.create(name: 'User 1', photo: 'url1', bio: 'Bio 1', posts_counter: 1)
     @post = @user.posts.create(title: 'Post Title', text: 'Post Body')
     @post.save(validate: false)
@@ -24,26 +23,20 @@ RSpec.feature 'User Show Page', type: :feature do
     end
   end
 
-
   scenario 'Display user profile information' do
     visit user_path(@user)
 
-    # Check if user profile information is displayed
     expect(page).to have_content(@user.name)
     expect(page).to have_content(@user.bio)
   end
 
   scenario 'Display recent posts and related details' do
-    # Create posts associated with the user
     @post2 = @user.posts.create(title: 'Post Title 2', text: 'Post Body 2')
     @post3 = @user.posts.create(title: 'Post Title 3', text: 'Post Body 3')
-
     @post2.save(validate: false)
     @post3.save(validate: false)
-
     visit user_path(@user)
 
-    # Check if recent posts and related details are displayed
     expect(page).to have_content("Post##{@post2.id}")
     expect(page).to have_content('Post Body 2')
   end

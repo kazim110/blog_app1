@@ -4,7 +4,6 @@ RSpec.feature 'User creates a post', type: :feature do
   before(:each) do
     # Create a user for testing
     @user = User.create(name: 'User 1', photo: 'url1', bio: 'Bio 1', posts_counter: 1)
-
   end
 
   scenario 'User creates a new post' do
@@ -18,7 +17,7 @@ RSpec.feature 'User creates a post', type: :feature do
     click_button 'Create Post'
     # Assuming successful post creation redirects to a different path, check the redirection
     expect(page).to have_current_path(user_posts_path(@user))
-    save_and_open_page 
+    save_and_open_page
     # Check if the newly created post content is displayed on the page
     expect(page).to have_content('This is the content of the new post')
   end
