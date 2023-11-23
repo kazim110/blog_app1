@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 RSpec.feature 'User Post Index Page', type: :feature do
   before(:each) do
     # Create a user and associated posts with comments and likes for testing
