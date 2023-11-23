@@ -29,48 +29,22 @@ RSpec.feature 'User Show Page', type: :feature do
     visit user_path(@user)
 
     # Check if user profile information is displayed
-    # expect(page).to have_content(@user.name)
-    # Add more expectations for other user attributes, e.g., photo, bio, etc.
+    expect(page).to have_content(@user.name)
+    expect(page).to have_content(@user.bio)
   end
 
   scenario 'Display recent posts and related details' do
     # Create posts associated with the user
-    # @post2 = @user.posts.create(title: 'Post Title 2', text: 'Post Body 2')
-    # @post3 = @user.posts.create(title: 'Post Title 3', text: 'Post Body 3')
+    @post2 = @user.posts.create(title: 'Post Title 2', text: 'Post Body 2')
+    @post3 = @user.posts.create(title: 'Post Title 3', text: 'Post Body 3')
 
-    # visit user_path(@user)
-    # save_and_open_page
+    @post2.save(validate: false)
+    @post3.save(validate: false)
 
-    # # Check if recent posts and related details are displayed
-    # expect(page).to have_content('Post Title 1')
-    # Add more expectations for other post details, e.g., body, comments, likes, etc.
+    visit user_path(@user)
+
+    # Check if recent posts and related details are displayed
+    expect(page).to have_content("Post##{@post2.id}")
+    expect(page).to have_content('Post Body 2')
   end
-  
-    # scenario 'Display recent posts and related details' do
-    #   visit user_path(@user)
-  
-    #   # Check if recent posts and related details are displayed
-    #   expect(page).to have_content('Recent Posts')
-  
-    #   expect(page).to have_content('Post#1')
-    #   expect(page).to have_content('Post#2')
-    #   expect(page).to have_content('Post 1 Text')
-    #   expect(page).to have_content('Post 2 Text')
-  
-    #   expect(page).to have_content('Comments')
-    #   expect(page).to have_content('Likes')
-  
-    #   expect(page).to have_link('See All Posts', href: user_posts_path(@user))
-    # end
-  
-    # scenario 'Handle no recent posts available' do
-    #   # Assuming @recent_posts is empty for the user
-    #   @user.recent_posts.destroy_all # Ensure no recent posts
-  
-    #   visit user_path(@user)
-  
-    #   # Check if appropriate message is displayed when no recent posts are available
-    #   expect(page).to have_content('No recent posts available.')
-    #   expect(page).to have_link('Create New Post', href: new_user_post_path(@user))
-    # end
-  end
+end
