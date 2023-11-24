@@ -3,9 +3,9 @@ class PostsController < ApplicationController
 
   before_action :current_user, only: %i[new create]
   def index
-    @user = User.includes(posts: [:comments, :likes, comments: [:user]]).find(params[:user_id])
+    @user = User.includes(posts: [:comments, :likes, { comments: [:user] }])
     @posts = @user.posts.includes(:comments, :likes)
-  end  
+  end
 
   def show
     @post = Post.includes(:comments, :likes, comments: [:user]).find(params[:id])
