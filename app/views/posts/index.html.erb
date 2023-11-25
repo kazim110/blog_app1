@@ -14,12 +14,14 @@
   </div>
 
   <%- @user.posts.each do |post| -%>
-    <%= link_to "/users/#{@user.id}/posts/#{post.id}", class: 'user-nav-link' do %>
   <div class="card m-3">
+  <%= link_to "/users/#{@user.id}/posts/#{post.id}", class: 'user-nav-link' do %>
     <div class="card-body">
       <h5 class="card-title">Post#<%= post.id -%></h5>
       <p class="card-text"><%= post.text -%></p>
     </div>
+  <%-end-%>
+
     <div class='card-footer'>
     <% post.recent_comments.each do |comment| %>
         <p><strong><%= comment.user.name %>:</strong>
@@ -31,6 +33,5 @@
     </div>
     </div>
   </div>
-  <%-end-%>
   <%-end-%>
 </div>

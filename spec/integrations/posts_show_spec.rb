@@ -10,9 +10,17 @@ RSpec.feature 'Post details display', type: :feature do
     # Create comments associated with the post
     @comment1 = @post.comments.create(user: @user, text: 'Comment 1 text')
     @comment2 = @post.comments.create(user: @user, text: 'Comment 2 text')
+    @comment1.save(validate: false)
+    @comment2.save(validate: false)
+    # Create likes for posts
+    @like1 = @post.likes.create(user: @user)
+    @like2 = @post.likes.create(user: @user)
+
+    visit user_post_path(user_id: @user.id, id: @post.id)
+
+
   end
   scenario 'Display post details and comments' do
-    visit user_post_path(user_id: @user.id, id: @post.id)
     # Check if post details are displayed
     expect(page).to have_content(@post.title)
     expect(page).to have_content(@user.name)
@@ -23,5 +31,20 @@ RSpec.feature 'Post details display', type: :feature do
     expect(page).to have_content('Comment 2 text')
     # Check if 'New Comment' link is present
     expect(page).to have_link('New Comment', href: new_user_post_comment_path(@user, @post))
+  end
+
+  scenario 'displays the number of likes for the post' do
+    expect(page).to have_content('Likes: 2') # Assuming there are no likes initially
+  end
+
+  scenario 'displays usernames of commenters' do
+    # Check if usernames of commenters are displayed
+    expect(page).to have_content('User 1')
+  end
+
+  scenario 'displays comments left by each commenter' do
+    # Check if comments left by each commenter are displayed
+    expect(page).to have_content('Comment 1 text')
+    expect(page).to have_content('Comment 2 text')
   end
 end
