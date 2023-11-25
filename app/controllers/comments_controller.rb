@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   layout 'application'
 
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
 
   def new
     @user = User.includes(:posts).find(params[:user_id])
