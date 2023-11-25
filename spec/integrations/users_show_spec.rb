@@ -1,48 +1,47 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
-RSpec.feature 'User Show Page', type: :feature do
+RSpec.feature 'User Show Page' do
   before(:each) do
-    @user = User.create(name: 'User 1', photo: 'url1', bio: 'Bio 1', posts_counter: 1)
-    @post = @user.posts.create(title: 'Post Title', text: 'Post Body')
-    @post.save(validate: false)
-    @comment1 = @post.comments.create(user: @user, text: 'Comment 1')
-    @comment2 = @post.comments.create(user: @user, text: 'Comment 2')
-    3.times do
-      @post.likes.create(user: @user)
-    end
+    @user = User.create(name: 'Test User', photo: 'user_photo_url', bio: 'Test bio', posts_counter: 3)
+    @post1 = @user.posts.create(text: 'Post 1')
+    @post2 = @user.posts.create(text: 'Post 2')
+    @post3 = @user.posts.create(text: 'Post 3')
+
+    @post1.save(validate: false)
+    @post2.save(validate: false)
+    @post3.save(validate: false)
+
+    visit user_path(@user)
   end
 
-  context 'when viewing user details' do
-    # Add test cases related to user details here
-    scenario 'I can see post details(title, author, numbers of comment&likes, body, commenter usernames)' do
-      visit user_post_path(user_id: @user.id, id: @post.id)
-      expect(page).to have_content(@user.name)
-      expect(page).to have_content(@post.text)
-      expect(page).to have_content('Comments: 2, Likes: 3')
-      @post.comments.each do |comment|
-        expect(page).to have_content(comment.user.name)
-        expect(page).to have_content(comment.text)
-      end
-    end
+  scenario 'displays user information' do
+    # Check if user's profile picture, username, and number of posts are displayed
+    expect(page).to have_css("img[src*='user_photo_url']")
+    expect(page).to have_content('Test User')
+    expect(page).to have_content('Number of Posts: 3') # Assuming it displays only 3 recent posts
   end
 
-  context 'when interacting with user actions' do
-    # Add test cases related to user actions here
-    scenario 'Display user profile information' do
-      visit user_path(@user)
-      expect(page).to have_content(@user.name)
-      expect(page).to have_content(@user.bio)
-    end
-    scenario 'Display recent posts and related details' do
-      @post2 = @user.posts.create(title: 'Post Title 2', text: 'Post Body 2')
-      @post3 = @user.posts.create(title: 'Post Title 3', text: 'Post Body 3')
-      @post2.save(validate: false)
-      @post3.save(validate: false)
-      visit user_path(@user)
-      expect(page).to have_content("Post##{@post2.id}")
-      expect(page).to have_content('Post Body 2')
-    end
+  scenario 'displays user bio' do
+    # Check if user's bio is displayed
+    expect(page).to have_content('Test bio')
+  end
+
+  scenario 'displays user\'s first 3 posts' do
+    # Check if the first 3 posts are displayed
+    expect(page).to have_content('Post 1')
+    expect(page).to have_content('Post 2')
+    expect(page).to have_content('Post 3')
+  end
+
+  scenario 'allows viewing all user posts' do
+    # Click the button to view all posts
+    click_link('See All Posts')
+    expect(page).to have_current_path(user_posts_path(@user))
+  end
+
+  scenario 'redirects to post show page on clicking a post' do
+    # Click on the first post
+    click_link('Post 1')
+    expect(page).to have_current_path("/users/#{@user.id}/posts/#{@post1.id}")
   end
 end
-# rubocop:enable Metrics/BlockLength
