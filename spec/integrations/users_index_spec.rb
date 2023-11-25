@@ -22,4 +22,10 @@ RSpec.feature 'User Index Page', type: :feature do
     # Check for the current number of posts as reflected in the view
     expect(page).to have_content('Number of Posts: 0', count: 2)
   end
+
+  scenario 'User can click the card redirects to user show page' do
+    visit users_path
+    click_link @user1.name
+    expect(current_path).to eq("/users/#{@user1.id}")
+  end
 end
