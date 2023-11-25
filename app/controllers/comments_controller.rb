@@ -1,14 +1,16 @@
 class CommentsController < ApplicationController
   layout 'application'
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   def new
-    @user = current_user
+    @user = User.includes(:posts).find(params[:user_id])
     @post = Post.find(params[:post_id])
     @comment = Comment.new(post: @post)
   end
 
   def create
-    @user = current_user
+    @user = User.includes(:posts).find(params[:user_id])
     @post = @user.posts.find(params[:post_id])
     @comment = @post.comments.new(comment_params.merge(user: @user))
 

@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   layout 'application'
 
+  before_action :authenticate_user!
+
   before_action :current_user, only: %i[new create]
   def index
     @user = current_user
