@@ -4,7 +4,6 @@ RSpec.describe 'users', type: :request do
   describe 'GET /index' do
     it 'return http success' do
       get '/users'
-
       expect(response).to be_successful
       expect(response).to render_template(:index)
       expect(response).to have_http_status(:ok)
