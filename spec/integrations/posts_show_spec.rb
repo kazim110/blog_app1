@@ -1,4 +1,6 @@
 require 'rails_helper'
+
+# rubocop:disable Metrics/BlockLength
 RSpec.feature 'Post details display', type: :feature do
   before(:each) do
     # Create a user for post author
@@ -17,8 +19,6 @@ RSpec.feature 'Post details display', type: :feature do
     @like2 = @post.likes.create(user: @user)
 
     visit user_post_path(user_id: @user.id, id: @post.id)
-
-
   end
   scenario 'Display post details and comments' do
     # Check if post details are displayed
@@ -48,3 +48,4 @@ RSpec.feature 'Post details display', type: :feature do
     expect(page).to have_content('Comment 2 text')
   end
 end
+# rubocop:enable Metrics/BlockLength
