@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :current_user, only: %i[new create]
   def index
     @user = current_user
-    @posts = Post.includes(:comments, :likes , comments: [:user])
+    @posts = Post.includes(:comments, :likes, comments: [:user])
   end
 
   def show

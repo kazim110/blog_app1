@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.feature 'User Show Page' do
   before(:each) do
     @user = User.create(name: 'Test User', photo: 'user_photo_url', bio: 'Test bio', posts_counter: 3)
@@ -45,3 +46,4 @@ RSpec.feature 'User Show Page' do
     expect(page).to have_current_path("/users/#{@user.id}/posts/#{@post1.id}")
   end
 end
+# rubocop:enable Metrics/BlockLength

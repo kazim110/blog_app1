@@ -19,11 +19,9 @@ RSpec.feature 'User Post Index Page', type: :feature do
     @like1 = @post1.likes.create(user: @user)
     @like2 = @post2.likes.create(user: @user)
     visit user_posts_path(@user)
-
   end
 
   scenario 'Display user profile information and posts' do
-
     # Check if user profile information is displayed
     expect(page).to have_content(@user.name)
     expect(page).to have_css("img[src*='test_photo.jpg']") # Assuming user photo is displayed via an img tag
