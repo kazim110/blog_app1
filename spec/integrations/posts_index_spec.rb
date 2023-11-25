@@ -18,10 +18,11 @@ RSpec.feature 'User Post Index Page', type: :feature do
     # Create likes for posts
     @like1 = @post1.likes.create(user: @user)
     @like2 = @post2.likes.create(user: @user)
+    visit user_posts_path(@user)
+
   end
 
   scenario 'Display user profile information and posts' do
-    visit user_posts_path(@user)
 
     # Check if user profile information is displayed
     expect(page).to have_content(@user.name)
@@ -36,5 +37,11 @@ RSpec.feature 'User Post Index Page', type: :feature do
     expect(page).to have_content('Comment 3')
     expect(page).to have_content('Likes: 1', count: 2) # Assuming each post has one like
     expect(page).to have_button('Like', count: 2, disabled: false) # Assuming there are buttons for liking posts
+  end
+
+  scenario 'redirects to post show page on clicking a post' do
+    # Click on a post and check if it redirects to the post's show page
+    click_link('Post Text 1') # Replace with the specific text/title of the post you want to click
+    expect(page).to have_current_path("/users/#{@user.id}/posts/#{@post1.id}")
   end
 end
