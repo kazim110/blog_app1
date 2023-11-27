@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   layout 'application'
 
-  before_action :current_user, only: %i[new create]
+  before_action :authenticate_user!
+
   def index
     @user = current_user
     @posts = Post.includes(:comments, :likes, comments: [:user])
